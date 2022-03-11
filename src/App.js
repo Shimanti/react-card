@@ -1,5 +1,6 @@
 import React from "react"
 import "./style.css"
+import Star from "./Star"
 
 export default function App() {
   const [contact, setContact] = React.useState({
@@ -10,22 +11,20 @@ export default function App() {
     isFavorite: true
   })
 
-  let starIcon = contact.isFavorite ? "star-empty.png" : "star-filled.png"
   function toggleStar() {
     setContact(prevContact => ({
       ...prevContact,
       isFavorite: !prevContact.isFavorite
     }))
   }
+
   return (
     <main>
       <div className="card">
         <img src="../images/user.png" className="card--image"/>
         <div className="card--info">
-          <img src={`../images/${starIcon}`}
-            className="card--favorite"
-            onClick={toggleStar}/>
-          <h2 className="card--name">
+          <Star isFilled={contact.isFavorite} handleClick={toggleStar}/>
+          <h2 className="card--name" >
             {contact.firstName} {contact.lastName}
           </h2>
           <p className="card--contact">{contact.phone}</p>
